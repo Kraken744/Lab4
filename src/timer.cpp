@@ -8,6 +8,7 @@
 
 /* Initialize timer 0, does not turn on timer */
 void initTimer0(){
+  
     //timer0 to CTC Mode (010)
     TCCR0A &= ~(1<< WGM00);
     TCCR0A |= (1 << WGM01);

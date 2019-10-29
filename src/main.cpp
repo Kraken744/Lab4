@@ -1,6 +1,4 @@
-// Author:         
-// Net ID:         
-// Date:           
+// Author: Marc Kragnes, Will Strider, Ryan Petersavage          
 // Assignment:     Lab 4
 //
 // Description: This file contains a programmatic overall description of the
@@ -27,6 +25,8 @@ volatile stateType state = waitPress;
 
 int main(){
   //Serial.begin(9600);
+
+  //initialize everything
   initSwitchPB3();
   initADC0();
   initPWMTimer3();
@@ -36,6 +36,8 @@ int main(){
   unsigned int result = 0;
   unsigned int motorsOn = 1;
   float voltage = 0;
+
+  //while loop constantly reads in voltage from POT, and changes dutycycle going to each motor accordingly
   while(1){
     
     // read in ADCL first then read ADCH
@@ -48,7 +50,7 @@ int main(){
     //change duty cycles going to motors
     changeDutyCycle(voltage, motorsOn);
     
-
+    //states for turning motors off/on using a debounce switch and ISR
     switch(state) {
       case waitPress:         
      // Serial.println("waitPress");
@@ -58,7 +60,7 @@ int main(){
       case debouncePress:
       //Serial.println("debouncepress");
       //Serial.flush();
-        delayMs(10);
+        delayMs(2);
         state = waitRelease;
         break;
 
@@ -70,15 +72,19 @@ int main(){
       case debounceRelease:
       //Serial.println("debounceRelease");
       //Serial.flush();
-        delayMs(10);
+        delayMs(2);
+
         // if motors off, turn on
         if (motorsOn == 0){
+
           //turn motors on by switching motorsOn to high, and using changeDutyCycle
           motorsOn = 1;
           changeDutyCycle(voltage, motorsOn);
         }
+
         //if motors on, turn off
          else {
+
           //turn motors off by switching motorsOn to low, and using changeDutyCycle
           motorsOn = 0;
           changeDutyCycle(voltage, motorsOn);

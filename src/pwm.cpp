@@ -85,7 +85,7 @@ void changeDutyCycle(float voltage, unsigned int motorsOn){
             OCR4A = 1023;
         }
     }
-    //if motors are off, does not turn the motors on
+    //if motors are off, does not do anything
     else {
         return;
     }

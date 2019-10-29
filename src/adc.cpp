@@ -25,10 +25,9 @@ void initADC0(){
     ADMUX &=  ~(1 << MUX4);
     ADCSRB &= ~(1 << MUX5);
 
-// set Auto Trigger Source Selection
-  // set to free-running mode ADTS[2:0] = 0b000
-  // 
-  ADCSRB &= ~(1 << ADTS2 | 1 << ADTS1 | 1 << ADTS0);
+    // set Auto Trigger Source Selection
+    // set to free-running mode ADTS[2:0] = 0b000
+    ADCSRB &= ~(1 << ADTS2 | 1 << ADTS1 | 1 << ADTS0);
 
     //enable auto-triggering and turn-on ADC
     ADCSRA |= (1 << ADATE) | (1 << ADEN);
