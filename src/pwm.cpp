@@ -62,7 +62,7 @@ void changeDutyCycle(float voltage, unsigned int motorsOn){
     
     if (motorsOn == 1){
         if (voltage < 1.5){
-            //if voltage from potentiometer is 0, left motor running at full power (50%), right off (0%)
+            //if voltage from potentiometer is near 0, left motor running at full power, right off
             OCR3A = 1023;
             OCR4A = 0;
         // Serial.println("at zero");
@@ -72,7 +72,7 @@ void changeDutyCycle(float voltage, unsigned int motorsOn){
         else if (voltage > 4.8){
             //Serial.println("over 4.8");
             // Serial.flush();
-            //if voltage from potentiometer is 5, left motor off (0%), right motor running at full power (50%)
+            //if voltage from potentiometer is near 5, left motor off, right motor running at full power
             OCR3A = 0;
             OCR4A = 1023;
         }
@@ -80,12 +80,13 @@ void changeDutyCycle(float voltage, unsigned int motorsOn){
         else{
             //Serial.println("mid");
             //Serial.flush();
-            //if voltage from potentiometer is ~2.5, both motors running at half power (25%)
+            //if voltage from potentiometer is ~2.5, both motors running at full power
             OCR3A = 1023;
             OCR4A = 1023;
         }
     }
+    //if motors are off, does not turn the motors on
     else {
-        
+        return;
     }
 }

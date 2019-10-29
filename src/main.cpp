@@ -58,7 +58,7 @@ int main(){
       case debouncePress:
       //Serial.println("debouncepress");
       //Serial.flush();
-        delayMs(1);
+        delayMs(10);
         state = waitRelease;
         break;
 
@@ -70,7 +70,7 @@ int main(){
       case debounceRelease:
       //Serial.println("debounceRelease");
       //Serial.flush();
-        delayMs(1);
+        delayMs(10);
         // if motors off
         if (motorsOn == 0){
           //turn motors on by turning ADC voltage reference to VCC
