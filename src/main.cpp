@@ -50,7 +50,7 @@ int main(){
     
 
     switch(state) {
-      case waitPress:
+      case waitPress:         
      // Serial.println("waitPress");
      // Serial.flush();
         break;
@@ -63,7 +63,7 @@ int main(){
         break;
 
       case waitRelease:
-      //Serial.println("wairRelease");
+      //Serial.println("waitRelease");
       //Serial.flush();
         break;
 
@@ -71,19 +71,17 @@ int main(){
       //Serial.println("debounceRelease");
       //Serial.flush();
         delayMs(10);
-        // if motors off
+        // if motors off, turn on
         if (motorsOn == 0){
-          //turn motors on by turning ADC voltage reference to VCC
-          OCR4A = 1023;
-          OCR3A = 1023;
+          //turn motors on by switching motorsOn to high, and using changeDutyCycle
           motorsOn = 1;
+          changeDutyCycle(voltage, motorsOn);
         }
-        //if motors on
+        //if motors on, turn off
          else {
-          //turn motors off by changing ADC voltage reference to AREF (0)
-          OCR4A = 0;
-          OCR3A = 0;
+          //turn motors off by switching motorsOn to low, and using changeDutyCycle
           motorsOn = 0;
+          changeDutyCycle(voltage, motorsOn);
          } 
         state = waitPress;
         break;
