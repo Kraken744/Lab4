@@ -7,6 +7,7 @@
 
 
 void initSwitchPB3(){
+    
     //Set switch as pull-up enabled input
     PORTB |= (1 << PORTB3);
     DDRB &= ~(1 << DDB3);

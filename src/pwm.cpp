@@ -28,7 +28,7 @@ TCCR3B |= (1 << CS30);
 TCCR3B &= ~(1 << CS31);
 TCCR3B &= ~(1 << CS32);
 
-//Set duty cycle to 25% (0.25 * 1023)
+//Set duty cycle to 100% (1023)
 OCR3A = 1023;
 }
 
@@ -52,7 +52,7 @@ TCCR4B |= (1 << CS40);
 TCCR4B &= ~(1 << CS41);
 TCCR4B &= ~(1 << CS42);
 
-//Set duty cycle to 25% (0.25 * 1023)
+//Set duty cycle to 100% (1023)
 OCR4A = 1023;
 }
 

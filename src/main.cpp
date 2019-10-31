@@ -12,8 +12,7 @@
 #include "adc.h"
 #include "switch.h"
 #include "pwm.h"
-
-//#include "Arduino.h"
+#include "Arduino.h"
 
 
 typedef enum stateType_enum {
@@ -24,7 +23,7 @@ typedef enum stateType_enum {
 volatile stateType state = waitPress;
 
 int main(){
-  //Serial.begin(9600);
+  Serial.begin(9600);
 
   //initialize everything
   initSwitchPB3();
@@ -45,7 +44,7 @@ int main(){
     result += ((unsigned int) ADCH) << 8;
 
     //need to check voltage for VCC
-    voltage = result * (5.19/1024.0);
+    voltage = result * (4.943/1024.0);
 
     //change duty cycles going to motors
     changeDutyCycle(voltage, motorsOn);
@@ -53,13 +52,13 @@ int main(){
     //states for turning motors off/on using a debounce switch and ISR
     switch(state) {
       case waitPress:         
-     // Serial.println("waitPress");
-     // Serial.flush();
+      Serial.println("waitPress");
+      Serial.flush();
         break;
 
       case debouncePress:
-      //Serial.println("debouncepress");
-      //Serial.flush();
+      Serial.println("debouncepress");
+      Serial.flush();
         delayMs(2);
         state = waitRelease;
         break;
@@ -70,8 +69,8 @@ int main(){
         break;
 
       case debounceRelease:
-      //Serial.println("debounceRelease");
-      //Serial.flush();
+      Serial.println("debounceRelease");
+      Serial.flush();
         delayMs(2);
 
         // if motors off, turn on
